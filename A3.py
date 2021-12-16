@@ -43,18 +43,18 @@ if __name__ == '__main__':
             # Read image
             img = cv2.imread(n)
             # Resize image to third of input
-            h, w = img.shape[0] // 3, img.shape[1] // 3
-            img = cv2.resize(img, (w, h))
+            height, width = img.shape[0] // 3, img.shape[1] // 3
+            img = cv2.resize(img, (width, height))
             # Get middle of resized image
-            m = w // 2
+            middle = width // 2
             # If page number is odd, right side is lower page number, otherwise reverse
             # Save both pages with correct number
             if i % 2 == 0:
-                cv2.imwrite(f"{path}/image{i:04n}.jpg", img[:, m:])
-                cv2.imwrite(f"{path}/image{pages - i:04n}.jpg", img[:, :m])
+                cv2.imwrite(f"{path}/image{i:04n}.jpg", img[:, middle:])
+                cv2.imwrite(f"{path}/image{pages - i:04n}.jpg", img[:, :middle])
             else:
-                cv2.imwrite(f"{path}/image{i:04n}.jpg", img[:, :m])
-                cv2.imwrite(f"{path}/image{pages - i:04n}.jpg", img[:, m:])
+                cv2.imwrite(f"{path}/image{i:04n}.jpg", img[:, :middle])
+                cv2.imwrite(f"{path}/image{pages - i:04n}.jpg", img[:, middle:])
 
         # Save images to PDF
         print("Creating PDF...")
