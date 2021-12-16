@@ -5,7 +5,7 @@ from glob import glob
 from PIL import Image
 from tqdm import tqdm
 
-# TODO: Specify input folder!
+# Specify input folder!
 # Structure should be "folder/magazine folders/images"
 # NOTE: root folder of input folder has to exist already!
 input_path = "F:/Programming/Magazine2PDF/Input"
