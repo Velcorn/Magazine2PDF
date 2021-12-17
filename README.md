@@ -1,7 +1,7 @@
 # Prerequisites:
 - Python installation (see [Link](https://wiki.python.org/moin/BeginnersGuide/Download))
 - Pip installation (should come with the latest Python version, 
-- Otherwise, see [Link](https://pip.pypa.io/en/stable/installation/))
+otherwise, see [Link](https://pip.pypa.io/en/stable/installation/))
 
 # Initial Setup:
 - Run `pip install -r requirements.txt`
@@ -10,4 +10,5 @@ Structure: ...input_path/magazine folders/images
 NOTE: root folder of input_path has to exist!
 
 # Convert images to PDFs
-- Simply open a CMD, Powershell or Terminal in the root folder of the project and execute `python main.py`
+- Simply open a CMD, Powershell or Terminal in the root folder of the project 
+and execute the desired script using `python A3.py`, for example.

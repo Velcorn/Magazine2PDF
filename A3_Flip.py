@@ -63,9 +63,9 @@ if __name__ == '__main__':
         # Get file names/paths from output folder
         names = sorted(glob(f"{path}/*.jpg"))
         # Open images with Pillow
-        imgs = [Image.open(name) for name in names]
+        images = [Image.open(name) for name in names]
         # Save all images into a single PDF
-        imgs[0].save(f"{path}/{magazine}.pdf", save_all=True, append_images=imgs[1:])
+        images[0].save(f"{path}/{magazine}.pdf", save_all=True, append_images=images[1:])
 
         # Clean up images after PDF is created
         for name in names:

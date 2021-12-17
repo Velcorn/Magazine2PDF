@@ -33,9 +33,9 @@ if __name__ == '__main__':
         # Save images to PDF
         print("Creating PDF...")
         # Open images with Pillow
-        imgs = [Image.open(name) for name in names]
+        images = [Image.open(name) for name in names]
         # Save all images into a single PDF
-        imgs[0].save(f"{path}/{magazine}.pdf", save_all=True, append_images=imgs[1:])
+        images[0].save(f"{path}/{magazine}.pdf", save_all=True, append_images=images[1:])
         # Increase folder counter
         counter += 1
         print("Done!")
