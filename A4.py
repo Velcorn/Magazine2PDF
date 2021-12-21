@@ -5,12 +5,12 @@ from PIL import Image
 # Specify input folder!
 # Structure should be "folder/magazine folders/images"
 # NOTE: root folder of input folder has to exist already!
-input_path = "F:/Programming/Magazine2PDF/Input"
+input_path = "F:/Programming/Magazine2PDF/Input_A4"
 
 
 if __name__ == '__main__':
     # Create output folder
-    output_path = f"{'/'.join(input_path.split('/')[:-1])}/Output"
+    output_path = input_path.replace("Input", "Output")
     os.makedirs(output_path, exist_ok=True)
     # Get all folders in input path
     folders = glob(f"{input_path}/*")
