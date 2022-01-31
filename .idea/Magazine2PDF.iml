@@ -6,7 +6,7 @@
       <excludeFolder url="file://$MODULE_DIR$/Input" />
       <excludeFolder url="file://$MODULE_DIR$/Output" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.8 (Magazine2PDF)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

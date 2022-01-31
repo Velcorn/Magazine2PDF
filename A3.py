@@ -8,7 +8,7 @@ from tqdm import tqdm
 # Specify input folder!
 # Structure should be "folder/magazine folders/images"
 # NOTE: root folder of input folder has to exist already!
-input_path = "F:/Programming/Magazine2PDF/Input_A3"
+input_path = "D:/Programming/Magazine2PDF/Input_A3"
 
 
 if __name__ == '__main__':
@@ -53,18 +53,27 @@ if __name__ == '__main__':
                 cv2.imwrite(f"{path}/image{i:04n}.jpg", img[:, :middle])
                 cv2.imwrite(f"{path}/image{pages - i:04n}.jpg", img[:, middle:])
 
-        # Save images to PDF
-        print("Creating PDF...")
         # Get file names/paths from output folder
         names = sorted(glob(f"{path}/*.jpg"))
+        # Open again and do proper resizing to 1/x of input res
+        print("Resizing images...")
+        divisor = 2
+        for n in tqdm(names, file=sys.stdout):
+            img = Image.open(n)
+            width, height = img.size
+            img = img.resize((width // divisor, height // divisor), Image.ANTIALIAS)
+            img.save(n)
+
+        # Save images to PDF
+        print("Creating PDF...")
         # Open images with Pillow
         images = [Image.open(name) for name in names]
         # Save all images into a single PDF
-        images[0].save(f"{path}/{magazine}.pdf", save_all=True, append_images=images[1:])
+        images[0].save(f"{path}/{magazine}.pdf", resolution=300, save_all=True, append_images=images[1:])
 
         # Clean up images after PDF is created
-        for name in names:
-            os.remove(name)
+        """for name in names:
+            os.remove(name)"""
 
         # Increase folder counter
         counter += 1
