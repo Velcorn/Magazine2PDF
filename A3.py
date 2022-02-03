@@ -72,8 +72,8 @@ if __name__ == '__main__':
         images[0].save(f"{path}/{magazine}.pdf", resolution=300, save_all=True, append_images=images[1:])
 
         # Clean up images after PDF is created
-        """for name in names:
-            os.remove(name)"""
+        for name in names:
+            os.remove(name)
 
         # Increase folder counter
         counter += 1
