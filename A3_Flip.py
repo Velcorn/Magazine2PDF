@@ -8,7 +8,7 @@ from tqdm import tqdm
 # Specify input folder!
 # Structure should be "folder/magazine folders/images"
 # NOTE: root folder of input folder has to exist already!
-input_path = "F:/Programming/Magazine2PDF/Input_A3_Flip"
+input_path = "D:/Programming/Magazine2PDF/Input_A3"
 
 
 if __name__ == '__main__':
@@ -21,6 +21,7 @@ if __name__ == '__main__':
     counter = 1
     for f in folders:
         print(f"Processing magazine {counter}/{len(folders)}...")
+
         # Skip if PDF already exists
         magazine = f.replace('\\', '/').split('/')[-1]
         if os.path.exists(f"{output_path}/{magazine}/{magazine}.pdf"):
@@ -31,19 +32,26 @@ if __name__ == '__main__':
         # Create equivalent path in output folder
         path = "/".join(f.replace("\\", "/").replace("Input", "Output").split("/"))
         os.makedirs(path, exist_ok=True)
-        names = glob(f"{f}/*")
-        pages = len(names) * 2 - 1
+        in_names = glob(f"{f}/*")
+        pages = len(in_names) * 2 - 1
 
         print("Cutting pages...")
-        for i, n in enumerate(tqdm(names, file=sys.stdout)):
+        for i, n in enumerate(tqdm(in_names, file=sys.stdout)):
             # Skip if image already present
             if os.path.exists(f"{path}/image{i:04n}.jpg"):
                 continue
 
             # Read image
             img = cv2.imread(n)
+
+            # Resize image to 1/x of original size
+            divisor = 2
+            height, width, _ = [x // divisor for x in img.shape]
+            img = cv2.resize(img, (width, height), cv2.INTER_AREA)
+
             # Get middle of image
-            middle = img.shape[1] // 2
+            middle = width // 2
+
             # If page number is odd, right side is lower page number, otherwise reverse
             # Save both pages with correct number
             if i % 2 == 0:
@@ -57,16 +65,19 @@ if __name__ == '__main__':
 
         # Save images to PDF
         print("Creating PDF...")
-        # Get file names/paths from output folder
-        names = sorted(glob(f"{path}/*.jpg"))
+
+        # Get name/path of images in output folder
+        out_names = sorted(glob(f"{path}/*.jpg"))
+
         # Open images with Pillow
-        images = [Image.open(name) for name in names]
+        images = [Image.open(name) for name in out_names]
+
         # Save all images into a single PDF
-        images[0].save(f"{path}/{magazine}.pdf", save_all=True, append_images=images[1:])
+        images[0].save(f"{path}/{magazine}.pdf", resolution=300, save_all=True, append_images=images[1:])
 
         # Clean up images after PDF is created
-        '''for name in names:
-            os.remove(name)'''
+        for n in out_names:
+            os.remove(n)
 
         # Increase folder counter
         counter += 1
