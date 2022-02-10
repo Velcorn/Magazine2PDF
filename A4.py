@@ -1,7 +1,6 @@
 import os
 import sys
 from glob import glob
-
 import cv2
 from PIL import Image
 from tqdm import tqdm
@@ -47,8 +46,14 @@ if __name__ == '__main__':
             img = cv2.resize(img, (width, height), cv2.INTER_AREA)
             cv2.imwrite(f"{path}/image{i:04n}.jpg", img)
 
-        # Clean up images after PDF is created
+        # Open images with Pillow
         out_names = sorted(glob(f"{path}/*.jpg"))
+        images = [Image.open(name) for name in out_names]
+
+        # Save all images into a single PDF
+        images[0].save(f"{path}/{magazine}.pdf", resolution=300, save_all=True, append_images=images[1:])
+
+        # Clean up images after PDF is created
         for n in out_names:
             os.remove(n)
 
