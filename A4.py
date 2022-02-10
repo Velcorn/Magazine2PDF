@@ -39,7 +39,7 @@ if __name__ == '__main__':
         in_names = sorted(glob(f"{f}/*.jpg"))
 
         # Resize images to 1/x of original size and save to output folder
-        for i, n in enumerate(tqdm(in_names)):
+        for i, n in enumerate(tqdm(in_names, file=sys.stdout)):
             img = cv2.imread(n)
             divisor = 2
             height, width, _ = [x // divisor for x in img.shape]
