@@ -5,8 +5,8 @@ from glob import glob
 from pikepdf import Pdf
 from tqdm import tqdm
 
-# Specify input folder!
-# Structure should be 'folder/magazine folders/images'
+# Specify input and comic folder!
+# Structure should be 'folder/year folders/issue folders/pdfs'
 # NOTE: root folder of input folder has to exist already!
 input_path = './Input_A4_P2M'
 comic_path = './Perscheid'
