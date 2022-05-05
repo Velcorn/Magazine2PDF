@@ -1,5 +1,9 @@
 colorama==0.4.4
+lxml==4.8.0
 numpy==1.21.4
 opencv-python==4.5.4.60
+packaging==21.3
+pikepdf==5.1.2
 Pillow==8.4.0
+pyparsing==3.0.8
 tqdm==4.62.3
